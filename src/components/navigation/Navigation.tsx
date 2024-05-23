@@ -1,7 +1,7 @@
 import { BellFilled, MailOutlined } from '@ant-design/icons';
 import { Badge, Drawer, Image, List, Space, Typography } from 'antd';
 import { useEffect, useState } from 'react';
-import { getComments, getOrders } from '../../API';
+// import { getComments, getOrders } from '../../API';
 
 interface Comment {
   id: number;
@@ -19,14 +19,14 @@ const Navigation = () => {
   const [commentsOpen, setCommentsOpen] = useState<boolean>(false);
   const [notificationsOpen, setNotificationsOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    getComments().then((res) => {
-      setComments(res.comments);
-    });
-    getOrders().then((res) => {
-      setOrders(res.products);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getComments().then((res) => {
+  //     setComments(res.comments);
+  //   });
+  //   getOrders().then((res) => {
+  //     setOrders(res.products);
+  //   });
+  // }, []);
 
   return (
     <div className="AppHeader">

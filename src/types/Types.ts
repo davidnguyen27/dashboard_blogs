@@ -40,3 +40,10 @@ export interface ModalBlogProps {
   setIsOpen: (isOpen: boolean) => void;
   handleCreate: (newBlog: Blogs) => void;
 }
+
+export interface ModalUpdateProps {
+  isUpdateOpen: boolean;
+  setIsUpdateOpen: (isUpdateOpen: boolean) => void;
+  handleUpdate: (updatedBlog: Blogs) => void;
+  selectedBlog: Blogs | null; // The selected blog to update
+}

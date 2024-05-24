@@ -5,20 +5,16 @@ export const getOrders = () => {
   return fetch('https://dummyjson.com/carts/1').then((res) => res.json());
 };
 
-export const getRevenue = () => {
-  return fetch('https://dummyjson.com/carts').then((res) => res.json());
-};
-
-export const getInventory = () => {
-  return fetch('https://dummyjson.com/products').then((res) => res.json());
-};
-
-export const getCustomers = () => {
-  return fetch('https://dummyjson.com/users').then((res) => res.json());
-};
-
-export const getComments = () => {
-  return fetch('https://dummyjson.com/comments').then((res) => res.json());
+export const updateBlog = async (id: string, updatedFields: Partial<Blogs>): Promise<Blogs> => {
+  try {
+    const response = await axios.put(
+      `https://6535e2c5c620ba9358ecc013.mockapi.io/blogs/${id}`,
+      updatedFields
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to update blog');
+  }
 };
 
 export const getBlogs = async (): Promise<Blogs[]> => {

@@ -2,8 +2,8 @@ import TextArea from 'antd/es/input/TextArea';
 import { Blogs, ModalBlogProps } from '../../types/Types';
 import { Button, Input, Modal, message } from 'antd';
 import { ChangeEvent, useState } from 'react';
-import { createBlog } from '../../API';
 import { Slide, toast } from 'react-toastify';
+import { createBlog } from '../../API';
 
 const ModalBlog = (props: ModalBlogProps) => {
   const { isOpen, setIsOpen, handleCreate } = props;
@@ -50,6 +50,8 @@ const ModalBlog = (props: ModalBlogProps) => {
     } catch (error) {
       message.error('Failed to create blog');
     }
+    handleCreate(newBlog);
+    handleCloseModal();
   };
 
   return (
@@ -65,7 +67,7 @@ const ModalBlog = (props: ModalBlogProps) => {
       ]}
     >
       <Input placeholder="Title" value={title} onChange={getTitleValue} />
-      <Input type="date" value={currentDate} />
+      <Input type="date" value={currentDate} disabled /> {/* Disabled only the createdAt field */}
       <TextArea
         placeholder="Description"
         autoSize={{ minRows: 6, maxRows: 10 }}

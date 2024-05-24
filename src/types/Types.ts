@@ -27,3 +27,24 @@ export interface DashboardCardProps {
   value: number;
   icon: React.ReactNode;
 }
+
+export interface Blogs {
+  id?: string; // Making id optional
+  title: string;
+  description: string;
+  createdAt?: string; // Making createdAt optional
+}
+
+
+export interface ModalBlogProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  handleCreate: (newBlog: Blogs) => void;
+}
+
+export interface ModalUpdateProps {
+  isUpdateOpen: boolean;
+  setIsUpdateOpen: (isUpdateOpen: boolean) => void;
+  handleUpdate: (updatedBlog: Blogs) => void;
+  selectedBlog: Blogs | null; // The selected blog to update
+}

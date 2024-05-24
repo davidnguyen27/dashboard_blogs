@@ -1,4 +1,4 @@
-import { AppstoreOutlined, BookOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { AppstoreOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -25,24 +25,9 @@ const SideMenu = () => {
         selectedKeys={[selectedKeys]}
         items={[
           {
-            label: 'Dashboard',
+            label: 'Blog Management',
             icon: <AppstoreOutlined />,
             key: '/',
-          },
-          {
-            label: 'Blog Management',
-            key: '/blog-management',
-            icon: <BookOutlined />,
-          },
-          {
-            label: 'Orders',
-            key: '/orders',
-            icon: <ShoppingCartOutlined />,
-          },
-          {
-            label: 'Customers',
-            key: '/customers',
-            icon: <UserOutlined />,
           },
         ]}
       ></Menu>

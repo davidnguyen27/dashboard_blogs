@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { Blogs } from '../types/Types';
 
-export const getOrders = () => {
-  return fetch('https://dummyjson.com/carts/1').then((res) => res.json());
-};
-
 export const updateBlog = async (id: string, updatedFields: Partial<Blogs>): Promise<Blogs> => {
   try {
     const response = await axios.put(
@@ -25,4 +21,16 @@ export const getBlogs = async (): Promise<Blogs[]> => {
 export const createBlog = async (newBlog: Blogs): Promise<Blogs> => {
   const res = await axios.post('https://6535e2c5c620ba9358ecc013.mockapi.io/blogs', newBlog);
   return res.data;
+};
+
+const apiClient = axios.create({
+  baseURL: 'https://664f259afafad45dfae28842.mockapi.io/api/v1', // Thay thế bằng URL của MockAPI hoặc API thật
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export const getBlogData = async (): Promise<Blogs[]> => {
+  const response = await apiClient.get('/BlogData');
+  return response.data;
 };

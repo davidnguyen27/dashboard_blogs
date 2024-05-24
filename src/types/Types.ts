@@ -27,3 +27,16 @@ export interface DashboardCardProps {
   value: number;
   icon: React.ReactNode;
 }
+
+export interface Blogs {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: string;
+}
+
+export interface ModalBlogProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  handleCreate: (newBlog: Blogs) => void;
+}

@@ -17,3 +17,7 @@ export const getCustomers = () => {
 export const getComments = () => {
   return fetch('https://dummyjson.com/comments').then((res) => res.json());
 };
+
+export const getBlogs = () => {
+  return fetch('https://6535e2c5c620ba9358ecc013.mockapi.io/blogs').then((res) => res.json());
+};

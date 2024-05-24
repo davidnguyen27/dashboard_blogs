@@ -29,8 +29,3 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
-export const getBlogData = async (): Promise<Blogs[]> => {
-  const response = await apiClient.get('/BlogData');
-  return response.data;
-};

@@ -5,6 +5,7 @@ import { getBlogs } from '../API';
 import { Blogs } from '../types/Types';
 import ModalBlog from '../components/modal/ModalBlog';
 import ModalUpdate from '../components/modal/ModalUpdate';
+import axios from 'axios';
 
 const BlogsManagement = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -14,14 +15,30 @@ const BlogsManagement = () => {
   const [selectedBlog, setSelectedBlog] = useState<Blogs | null>(null);
 
   useEffect(() => {
-    fetchBlogs();
+    setLoading(true);
+    const getData = getBlogs()
+      .then((blogData: Blogs[]) => {
+        setDataSource(blogData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching blog data:', error);
+        setLoading(false);
+      });
+    console.log('check data: ', getData);
   }, []);
 
-  const fetchBlogs = async () => {
-    setLoading(true);
-    const blogs = await getBlogs();
-    setDataSource(blogs);
-    setLoading(false);
+  const handleDelete = (id: string) => {
+    if (window.confirm('Are you sure you want to delete this blog?')) {
+      axios
+        .delete(`https://6535e2c5c620ba9358ecc013.mockapi.io/blogs/${id}`)
+        .then(() => {
+          setDataSource((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));
+        })
+        .catch((error) => {
+          console.error('Error deleting blog:', error);
+        });
+    }
   };
 
   const handleOpenModal = () => {
@@ -85,6 +102,9 @@ const BlogsManagement = () => {
                   </Button>
                   <Button type="primary">
                     <FundViewOutlined />
+                  </Button>
+                  <Button type="primary" danger onClick={() => handleDelete(record.id + '')}>
+                    Delete
                   </Button>
                 </Space>
               ),

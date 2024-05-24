@@ -1,19 +1,43 @@
-export const getOrders = () => {
-  return fetch('https://dummyjson.com/carts/1').then((res) => res.json());
+// API.ts
+import axios from 'axios';
+
+const BASE_URL = 'https://6535e2c5c620ba9358ecc013.mockapi.io/blogs';
+
+export interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  // Add other fields if needed
+}
+
+export const getBlogs = async (): Promise<Blog[]> => {
+  try {
+    const response = await fetch(BASE_URL);
+    if (!response.ok) {
+      throw new Error('Failed to fetch blogs');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Failed to fetch blogs');
+  }
 };
 
-export const getRevenue = () => {
-  return fetch('https://dummyjson.com/carts').then((res) => res.json());
+export const updateBlog = async (id: string, updatedFields: Partial<Blog>): Promise<Blog> => {
+  try {
+    const response = await axios.put(`${BASE_URL}/${id}`, updatedFields);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to update blog');
+  }
 };
 
-export const getInventory = () => {
-  return fetch('https://dummyjson.com/products').then((res) => res.json());
-};
-
-export const getCustomers = () => {
-  return fetch('https://dummyjson.com/users').then((res) => res.json());
-};
-
-export const getComments = () => {
-  return fetch('https://dummyjson.com/comments').then((res) => res.json());
+export const getBlog = async (id: string) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to fetch blog with ID ${id}`);
+  }
 };

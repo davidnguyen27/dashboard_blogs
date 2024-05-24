@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 // import Dashboard from '../../pages/Dashboard';
 // import OrdersManagement from '../../pages/OrdersManagement';
 
-import BlogManagement from '../../pages/BlogManagement';
+import BlogManagement from '../../pages/InventoryManagement';
 
 
 const AppRoutes = () => {

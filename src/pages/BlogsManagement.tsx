@@ -1,4 +1,4 @@
-import { Avatar, Button, Rate, Space, Table, Typography } from 'antd';
+import { Button, Space, Table, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import { getBlogs } from '../API';
 import { DeleteOutlined, FundViewOutlined, SignatureOutlined } from '@ant-design/icons';
@@ -38,13 +38,6 @@ const BlogsManagement = () => {
           loading={loading}
           columns={[
             {
-              title: 'Thumbnail',
-              dataIndex: 'thumbnail',
-              render: (link) => {
-                return <Avatar src={link} />;
-              },
-            },
-            {
               title: 'Title',
               dataIndex: 'title',
             },
@@ -52,13 +45,6 @@ const BlogsManagement = () => {
               title: 'Description',
               dataIndex: 'description',
             },
-            // {
-            //   title: 'Rating',
-            //   dataIndex: 'rating',
-            //   render: (rating) => {
-            //     return <Rate value={rating} allowHalf disabled />;
-            //   },
-            // },
             {
               title: 'Created At',
               dataIndex: 'createdAt',

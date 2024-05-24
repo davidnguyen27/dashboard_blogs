@@ -3,6 +3,7 @@ import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import PageContent from './components/content/PageContent';
 import SideMenu from './components/side/SideMenu';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <PageContent></PageContent>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

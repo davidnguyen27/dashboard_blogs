@@ -1,7 +1,9 @@
 import TextArea from 'antd/es/input/TextArea';
 import { Blogs, ModalBlogProps } from '../../types/Types';
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal, message } from 'antd';
 import { ChangeEvent, useState } from 'react';
+import { createBlog } from '../../API';
+import { Slide, toast } from 'react-toastify';
 
 const ModalBlog = (props: ModalBlogProps) => {
   const { isOpen, setIsOpen, handleCreate } = props;
@@ -23,15 +25,31 @@ const ModalBlog = (props: ModalBlogProps) => {
     setIsOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const newBlog: Blogs = {
       id: `${Date.now()}-${Math.floor(Math.random() * 10000)}`,
       title: title,
       description: description,
       createdAt: currentDate,
     };
-    handleCreate(newBlog);
-    handleCloseModal();
+    try {
+      const createdBlog = await createBlog(newBlog);
+      handleCreate(createdBlog);
+      toast.success('Create successful', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Slide,
+      });
+      handleCloseModal();
+    } catch (error) {
+      message.error('Failed to create blog');
+    }
   };
 
   return (

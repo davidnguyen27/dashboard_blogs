@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Button, Space, Table, Typography, Row, Col } from 'antd';
-import { FundViewOutlined, SignatureOutlined } from '@ant-design/icons';
+import { Button, Space, Table, Typography, Row, Col, Card } from 'antd';
+import { SignatureOutlined } from '@ant-design/icons';
 import { getBlogs } from '../API';
 import { Blogs } from '../types/Types';
 import ModalBlog from '../components/modal/ModalBlog';
@@ -79,59 +79,74 @@ const BlogsManagement = () => {
 
   return (
     <>
-      <Space size={20} direction="vertical" style={{ width: '100%' }}>
-        <Row justify="space-between" align="middle">
-          <Col xs={24} sm={16}>
-            <Typography.Title level={4}>Blog Management</Typography.Title>
-          </Col>
-          <Col xs={24} sm={8} style={{ textAlign: 'right' }}>
-            <Button type="primary" onClick={handleOpenModal}>
-              + Add new post
-            </Button>
-          </Col>
-        </Row>
-        <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
-          <Col xs={24} sm={8}>
-            <Search placeholder="Search blogs" onSearch={handleSearch} enterButton />
-          </Col>
-        </Row>
-        <Table
-          loading={loading}
-          columns={[
-            {
-              title: 'Title',
-              dataIndex: 'title',
-              ellipsis: true,
-            },
-            {
-              title: 'Description',
-              dataIndex: 'description',
-              ellipsis: true,
-            },
-            {
-              title: 'Created At',
-              dataIndex: 'createdAt',
-            },
-            {
-              title: 'Action',
-
-              render: (_, record) => (
-                <Space size="middle">
-                  <Button type="primary" onClick={() => openUpdateModal(record)}>
-                    <SignatureOutlined />
-                  </Button>
-                  <Button type="primary" danger onClick={() => handleDelete(record.id + '')}>
-                    Delete
-                  </Button>
-                </Space>
-              ),
-            },
-          ]}
-          dataSource={filteredData.map((item) => ({ ...item, key: item.id }))}
-          pagination={{ pageSize: 6 }}
-          scroll={{ x: 'max-content' }}
-        />
-      </Space>
+      <Card style={{ margin: '20px' }}>
+        <Space size={20} direction="vertical" style={{ width: '100%' }}>
+          <Row justify="space-between" align="middle">
+            <Col xs={24} sm={16} md={18} lg={20}>
+              <Typography.Title level={4} style={{ textAlign: 'center' }}>
+                Blog Management
+              </Typography.Title>
+            </Col>
+            <Col xs={24} sm={8} md={6} lg={4} style={{ textAlign: 'center' }}>
+              <Button type="primary" onClick={handleOpenModal} block>
+                + Add new post
+              </Button>
+            </Col>
+          </Row>
+          <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
+            <Col xs={24} sm={16} md={12} lg={8} style={{ marginBottom: '10px' }}>
+              <Search placeholder="Search blogs" onSearch={handleSearch} enterButton />
+            </Col>
+          </Row>
+          <Table
+            loading={loading}
+            columns={[
+              {
+                title: 'Title',
+                dataIndex: 'title',
+                ellipsis: true,
+              },
+              {
+                title: 'Description',
+                dataIndex: 'description',
+                ellipsis: true,
+              },
+              {
+                title: 'Status',
+                dataIndex: 'status',
+              },
+              {
+                title: 'Created At',
+                dataIndex: 'createDate',
+              },
+              {
+                title: 'Update At',
+                dataIndex: 'updateDate',
+              },
+              {
+                title: 'Content',
+                dataIndex: 'content',
+              },
+              {
+                title: 'Action',
+                render: (_, record) => (
+                  <Space size="middle">
+                    <Button type="primary" onClick={() => openUpdateModal(record)}>
+                      <SignatureOutlined />
+                    </Button>
+                    <Button type="primary" danger onClick={() => handleDelete(record.id + '')}>
+                      Delete
+                    </Button>
+                  </Space>
+                ),
+              },
+            ]}
+            dataSource={filteredData.map((item) => ({ ...item, key: item.id }))}
+            pagination={{ pageSize: 10 }}
+            scroll={{ x: 'max-content' }}
+          />
+        </Space>
+      </Card>
       <ModalBlog isOpen={isOpen} setIsOpen={setIsOpen} handleCreate={handleCreate} />
       <ModalUpdate
         isUpdateOpen={isUpdateOpen}

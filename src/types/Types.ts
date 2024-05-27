@@ -32,8 +32,12 @@ export interface Blogs {
   id: string;
   title: string;
   description: string;
-  createdAt: string;
+  status: string;
+  createDate: string;
+  updateDate: string;
+  content: string;
 }
+
 
 export interface ModalBlogProps {
   isOpen: boolean;
